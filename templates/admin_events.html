@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Events</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+ 
+  <body class="admin"> 
+  <header>
+    <h1>Manage Events (Single Page)</h1>
+    <nav>
+      <!-- Add links back to main site if you like -->
+      <a href="{{ url_for('admin_events') }}">Refresh</a>
+      <a href="{{ url_for('index') }}">Home</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- CREATE FORM -->
+    <section style="margin-bottom: 30px;">
+      <h2>Create a New Event</h2>
+      <form action="{{ url_for('admin_events') }}" method="POST">
+        <input type="hidden" name="action" value="create">
+        <div>
+          <label for="create_name">Name:</label>
+          <input type="text" id="create_name" name="name" required>
+        </div>
+        <div>
+          <label for="create_date">Date:</label>
+          <input type="text" id="create_date" name="date" placeholder="YYYY-MM-DD" required>
+        </div>
+        <div>
+          <label for="create_location">Location:</label>
+          <input type="text" id="create_location" name="location" required>
+        </div>
+        <button type="submit">Create Event</button>
+      </form>
+    </section>
+
+    <!-- LIST, EDIT, DELETE -->
+    <section>
+      <h2>Existing Events</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+          <tr>
+            <!-- Display event data -->
+            <td>{{ event.name }}</td>
+            <td>{{ event.date }}</td>
+            <td>{{ event.location }}</td>
+
+            <!-- EDIT FORM (inline) -->
+            <td>
+              <form action="{{ url_for('admin_events') }}" method="POST" style="display:inline-block;">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="event_id" value="{{ event.id }}">
+
+                <label for="edit_name_{{event.id}}" style="display:none;">Name:</label>
+                <input type="text" id="edit_name_{{event.id}}" name="name" value="{{ event.name }}" required>
+
+                <label for="edit_date_{{event.id}}" style="display:none;">Date:</label>
+                <input type="text" id="edit_date_{{event.id}}" name="date" value="{{ event.date }}" required>
+
+                <label for="edit_location_{{event.id}}" style="display:none;">Location:</label>
+                <input type="text" id="edit_location_{{event.id}}" name="location" value="{{ event.location }}" required>
+
+                <button type="submit">Update</button>
+              </form>
+            </td>
+
+            <!-- DELETE FORM -->
+            <td>
+              <form action="{{ url_for('admin_events') }}" method="POST" style="display:inline-block;">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="event_id" value="{{ event.id }}">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this event?');">
+                  Delete
+                </button>
+              </form>
+            </td>
+
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

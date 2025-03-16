@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bengaluru Events</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <h1>Upcoming Events in Bengaluru</h1>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('explore') }}">Explore</a>
+        <a href="{{ url_for('events') }}">Events</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    
+    <!-- events page  -->
+    <section class="events-section">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+      <h2>Upcoming Events</h2>
+      <div class="card-container">
+        {% for event in events %}
+        <div class="card">
+          <img src="{{ event.image_url}}" alt="{{ event.name }}" class="card-img" />
+          <div class="card-content">
+            <h3>{{ event.name }}</h3>
+            <p>Date: {{ event.date }}</p>
+            <p>Location: {{ event.location }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Bengaluru Explorer | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Bengaluru</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <h1>Explore Bengaluru</h1>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('explore') }}">Explore</a>
+        <a href="{{ url_for('events') }}">Events</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="landmarks-section">
+      <h2>Landmarks</h2>
+      <div class="card-container">
+        {% for landmark in landmarks %}
+        <div class="card">
+          <img src="{{ landmark.image or url_for('static', filename='images/default-landmark.jpg') }}" alt="{{ landmark.name }}" class="card-img" />
+          <div class="card-content">
+            <h3>{{ landmark.name }}</h3>
+            <p>{{ landmark.description }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="cuisines-section">
+      <h2>Local Cuisines</h2>
+      <div class="card-container">
+        {% for cuisine in cuisines %}
+        <div class="card">
+          <img src="{{ cuisine.image or url_for('static', filename='images/default-cuisine.jpg') }}" alt="{{ cuisine.name }}" class="card-img" />
+          <div class="card-content">
+            <h3>{{ cuisine.name }}</h3>
+            <p>{{ cuisine.specialty }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Bengaluru Explorer | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Bengaluru</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <h1>Explore Bengaluru</h1>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('explore') }}">Explore</a>
+        <a href="{{ url_for('events') }}">Events</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="landmarks-section">
+      <h2>Landmarks</h2>
+      <div class="card-container">
+        {% for landmark in landmarks %}
+        <div class="card">
+          <img src="{{ 'https://source.unsplash.com/featured/?landmark,bengaluru' }}" alt="{{ landmark.name }}" class="card-img" />
+          <div class="card-content">
+            <h3>{{ landmark.name }}</h3>
+            <p>{{ landmark.description }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="cuisines-section">
+      <h2>Local Cuisines</h2>
+      <div class="card-container">
+        {% for cuisine in cuisines %}
+        <div class="card">
+          <img src="{{'https://source.unsplash.com/featured/?food,cuisine' }}" alt="{{ cuisine.name }}" class="card-img" />
+          <div class="card-content">
+            <h3>{{ cuisine.name }}</h3>
+            <p>{{ cuisine.specialty }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Bengaluru Explorer | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Bengaluru</title>
+  <!-- Link to your CSS file -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <!-- Link to your JS file (if needed) -->
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+
+  <header>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <div class="header-container">
+      <h1>EXPLORE BENGALURU</h1>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('explore') }}">Explore</a>
+        <a href="{{ url_for('events') }}">Events</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Landmarks Section -->
+    <section class="landmarks-section">
+      <h2>Landmarks</h2>
+      <div class="card-container">
+        {% for landmark in landmarks %}
+          <div class="card">
+            <!-- Use landmark.image_url from your data -->
+             
+            <img src="{{ landmark.image_url }}" alt="{{ landmark.name }}" class="card-img" />
+            <div class="card-content">
+              <h3>{{ landmark.name }}</h3>
+              <p>{{ landmark.description }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Cuisines Section -->
+    <section class="cuisines-section">
+      <h2>Local Cuisines</h2>
+      <div class="card-container">
+        {% for cuisine in cuisines %}
+          <div class="card">
+            <!-- Use cuisine.image_url from your data -->
+            <img src="{{ cuisine.image_url }}" alt="{{ cuisine.name }}" class="card-img" />
+            <div class="card-content">
+              <h3>{{ cuisine.name }}</h3>
+              <p>{{ cuisine.specialty }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Bengaluru Explorer | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bengaluru Explorer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+      <h1>CITYHUB EXPLORER</h1>
+      <nav>
+        <div class="nav-links">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('explore') }}">Explore</a>
+        <a href="{{ url_for('events') }}">Events</a>
+      </div>
+      </nav>
+
+      <!-- note that some of the features have been disable ..feel free to take up for future enhancements -->
+      <!-- City Selection Dropdown -->
+      <!-- <select id="citySelector" class="city-dropdown">
+        <option value="bengaluru" selected>Bengaluru</option>
+        <option value="To Be Added">Mumbai</option>
+      
+      </select> -->
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h2 id = "city-heading">Discover Bengaluru's Hidden Gem</h2>
+        <p>Explore the best landmarks, cuisines, and events happening around the city.</p>
+
+        <script>
+          document.getElementById("citySelector").addEventListener("change", function() {
+              let selectedCity = this.options[this.selectedIndex].text;
+              document.getElementById("city-heading").innerText = "Discover " + selectedCity + "'s Hidden Gems";
+          });
+        </script>
+        <!-- Main Action Buttons -->
+        <div class="hero-buttons">
+            <a href="{{ url_for('explore') }}" class="btn">Explore Now</a>
+            <button class="btn admin-btn" onclick="openAdminModal()">Admin Login</button>
+        </div>    
+      </div>
+    </section>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeAdminModal()">&times;</span>
+        <h2>Admin Login</h2>
+        <p>Select the section you want to manage:</p>
+        <a href="{{ url_for('admin_events') }}" class="btn">Manage Events</a>
+        <a href="{{ url_for('admin_explore') }}" class="btn">Manage Explore</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Bengaluru Explorer | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // City Selector
+    document.getElementById("citySelector").addEventListener("change", function() {
+        let selectedCity = this.value;
+        alert("You selected: " + selectedCity);
+        // You can extend this to fetch city-specific data dynamically
+    });
+
+    // Admin Login Modal Functions
+    function openAdminModal() {
+        document.getElementById("adminModal").style.display = "block";
+    }
+    function closeAdminModal() {
+        document.getElementById("adminModal").style.display = "none";
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        let modal = document.getElementById("adminModal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+  </script>
+
+  <style>
+    /* City Dropdown Styling */
+    .city-dropdown {
+      padding: 5px;
+      font-size: 16px;
+      margin-left: auto;
+      border-radius: 5px;
+    }
+
+    /* Admin Login Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 40%;
+      text-align: center;
+    }
+
+    .close-btn {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Button Styling */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      text-decoration: none;
+      background-color: #007BFF;
+      color: white;
+      border-radius: 5px;
+      margin: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    .admin-btn {
+      background-color: #dc3545;
+    }
+
+    .admin-btn:hover {
+      background-color: #b52b3c;
+    }
+  </style>
+
+</body>
+</html>

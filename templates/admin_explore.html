@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Landmarks & Cuisines</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="admin">
+  <header>
+    <h1>Manage Landmarks & Cuisines</h1>
+    <nav>
+      <a href="{{ url_for('admin_explore') }}">Refresh</a>
+      <a href="{{ url_for('index') }}">Home</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Landmarks Section -->
+    <section>
+      <h2>Landmarks</h2>
+      <!-- Create Landmark Form -->
+      <form action="{{ url_for('admin_explore') }}" method="POST" style="margin-bottom:20px;">
+        <input type="hidden" name="category" value="landmark">
+        <input type="hidden" name="action" value="create">
+        <div>
+          <label for="landmark_name">Name:</label>
+          <input type="text" id="landmark_name" name="name" required>
+        </div>
+        <div>
+          <label for="landmark_desc">Description:</label>
+          <input type="text" id="landmark_desc" name="description" required>
+        </div>
+        <button type="submit" class="btn">Add Landmark</button>
+      </form>
+
+      <!-- List of Landmarks -->
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for landmark in landmarks %}
+          <tr>
+            <td>{{ landmark.name }}</td>
+            <td>{{ landmark.description }}</td>
+            <td>
+              <form action="{{ url_for('admin_explore') }}" method="POST">
+                <input type="hidden" name="category" value="landmark">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="id" value="{{ landmark.id }}">
+                <input type="text" name="name" value="{{ landmark.name }}" required>
+                <input type="text" name="description" value="{{ landmark.description }}" required>
+                <button type="submit" class="btn">Update</button>
+              </form>
+            </td>
+            <td>
+              <form action="{{ url_for('admin_explore') }}" method="POST">
+                <input type="hidden" name="category" value="landmark">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="{{ landmark.id }}">
+                <button type="submit" class="btn" onclick="return confirm('Delete this landmark?');">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Cuisines Section -->
+    <section style="margin-top:40px;">
+      <h2>Cuisines</h2>
+      <!-- Create Cuisine Form -->
+      <form action="{{ url_for('admin_explore') }}" method="POST" style="margin-bottom:20px;">
+        <input type="hidden" name="category" value="cuisine">
+        <input type="hidden" name="action" value="create">
+        <div>
+          <label for="cuisine_name">Name:</label>
+          <input type="text" id="cuisine_name" name="name" required>
+        </div>
+        <div>
+          <label for="cuisine_spec">Specialty:</label>
+          <input type="text" id="cuisine_spec" name="specialty" required>
+        </div>
+        <button type="submit" class="btn">Add Cuisine</button>
+      </form>
+
+      <!-- List of Cuisines -->
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Specialty</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for cuisine in cuisines %}
+          <tr>
+            <td>{{ cuisine.name }}</td>
+            <td>{{ cuisine.specialty }}</td>
+            <td>
+              <form action="{{ url_for('admin_explore') }}" method="POST">
+                <input type="hidden" name="category" value="cuisine">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="id" value="{{ cuisine.id }}">
+                <input type="text" name="name" value="{{ cuisine.name }}" required>
+                <input type="text" name="specialty" value="{{ cuisine.specialty }}" required>
+                <button type="submit" class="btn">Update</button>
+              </form>
+            </td>
+            <td>
+              <form action="{{ url_for('admin_explore') }}" method="POST">
+                <input type="hidden" name="category" value="cuisine">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="{{ cuisine.id }}">
+                <button type="submit" class="btn" onclick="return confirm('Delete this cuisine?');">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
